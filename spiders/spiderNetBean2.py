@@ -3,7 +3,7 @@
 from selenium import webdriver
 # from scrapy.selector import Selector
 import time
-
+print("startTime", time.time())
 # 设置chromedriver不加载图片
 chrome_options = webdriver.ChromeOptions()
 prefs = {"profile.managed_default_content_settings.images": 2}
@@ -13,8 +13,8 @@ browser = webdriver.Chrome(executable_path="E:\pythonDoc\chromedriver.exe", chro
 
 # browser = webdriver.Chrome(executable_path="E:\pythonDoc\chromedriver.exe")
 
-browser.get("https://music.163.com/song?id=449818741")
-
+# browser.get("https://music.163.com/song?id=449818741")
+browser.get("https://music.163.com/song?id=432506345")
 time.sleep(3)
 # 切换到contentFrame
 browser.switch_to.frame("contentFrame")
@@ -51,9 +51,10 @@ time.sleep(1)
 for index in range(2500):
     print("当前抓取的页数"+ str(index + 2) + "页")
     getNextPageData()
-    time.sleep(1)
+    time.sleep(0.7)
     getPageData()
 
+print("endTime", time.time())
 fo.close()
 print("一共抓取到了" + str(commentCount) + "条数据")
 #全部数据处理 时间 姓名 评论
