@@ -4,7 +4,7 @@ _date__ = '2018/5/13 8:26'
 
 import scrapy
 from urllib import parse
-from netbean.spiders.spiderNetBean import netBeanUtil
+# from netbean.spiders.spiderNetBean import netBeanUtil
 
 class NetBeanCloud(scrapy.Spider):
     name = "netBeanCloud"
