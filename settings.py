@@ -66,9 +66,11 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'netbean.pipelines.NetbeanPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   # 'netbean.pipelines.NetbeanPipeline': 300,
+    'netbean.pipelines.CSVPipeline': 5,
+
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -93,4 +95,4 @@ ROBOTSTXT_OBEY = False
 
 import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print (os.path.join(BASE_DIR, 'AritcleSpider'))
+print (os.path.join(BASE_DIR, 'netbean'))

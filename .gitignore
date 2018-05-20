@@ -1,0 +1,4 @@
+
+*.pyc
+*.pyc
+spiders/__pycache__/spider.cpython-35.pyc
