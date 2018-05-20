@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from selenium import webdriver
-from scrapy.selector import Selector
+# from scrapy.selector import Selector
 import time
 
 # 设置chromedriver不加载图片
@@ -9,9 +9,9 @@ chrome_options = webdriver.ChromeOptions()
 prefs = {"profile.managed_default_content_settings.images": 2}
 chrome_options.add_experimental_option("prefs", prefs)
 chrome_options.add_argument("--headless")
-browser = webdriver.Chrome(executable_path="D:\workspace_p\pythondoc\chromedriver.exe", chrome_options=chrome_options)
+browser = webdriver.Chrome(executable_path="E:\pythonDoc\chromedriver.exe", chrome_options=chrome_options)
 
-# browser = webdriver.Chrome(executable_path="D:\workspace_p\pythondoc\chromedriver.exe")
+# browser = webdriver.Chrome(executable_path="E:\pythonDoc\chromedriver.exe")
 
 browser.get("https://music.163.com/song?id=449818741")
 
@@ -20,20 +20,22 @@ time.sleep(3)
 browser.switch_to.frame("contentFrame")
 fo = open("comments.txt", "w+", encoding='utf-8')
 
-def getPageData():
+commentCount = 0
 
+def getPageData():
+    global commentCount
     #解析每一条数据
     nameList = browser.find_element_by_id('comment-box').find_elements_by_css_selector(".f-brk")
     for content in nameList:
         try:
             nameContent = content.find_element_by_css_selector('a')
             name = nameContent.text
-            print(name)
+            # print(name)
             contents = content.text
-            comment = contents[len(name) + 1:len(contents)]
-            print(comment)
+            comment = contents[len(name) + 1:len(contents)] + '\n'
             fo.write(comment)
             fo.flush()
+            commentCount+=1
         except:
             print("出错了怎么回事")
 
@@ -46,13 +48,14 @@ def getNextPageData():
 #先拿10页的数据
 getPageData()
 time.sleep(1)
-for index in range(100):
+for index in range(2500):
     print("当前抓取的页数"+ str(index + 2) + "页")
     getNextPageData()
     time.sleep(1)
     getPageData()
 
 fo.close()
+print("一共抓取到了" + str(commentCount) + "条数据")
 #全部数据处理 时间 姓名 评论
 # def getAddPageData():
 #     nameList = browser.find_element_by_id('comment-box').find_elements_by_css_selector('.m-cmmt .cmmts .itm .cntwrap')
