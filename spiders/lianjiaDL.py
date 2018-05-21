@@ -11,6 +11,7 @@ class LianjiadlSpider(scrapy.Spider):
     custom_settings = {
         'DOWNLOAD_DELAY': '0',
         'LOG_ENABLED': True,
+        'CONCURRENT_REQUESTS': 32,
         'ITEM_PIPELINES': {'netbean.pipelines.CSVPipeline': 5},
     }
 
@@ -37,7 +38,7 @@ class LianjiadlSpider(scrapy.Spider):
             hourse_info = post_node.css(".houseInfo::text").extract_first()
             house_url = post_node.css(".title ::attr(href)").extract_first()
 
-            #这里本来可以用add_css 但是因为遇到了同时有多条数据的情况所以就从post_node先取得node然后在add_value吧
+            # 这里本来可以用add_css 但是因为遇到了同时有多条数据的情况所以就从post_node先取得node然后在add_value吧
             item_loader.add_value("house_title", house_title)
             item_loader.add_value('house_unit_price', unitPrice)
             item_loader.add_value('total_price', total_price)
@@ -48,15 +49,18 @@ class LianjiadlSpider(scrapy.Spider):
             yield lianjia_item
 
         # 提取下一页并交给scrapy进行下载
-        next_url = "https://dl.lianjia.com/ershoufang/ganjingzi/pg{}/".format(self.current_page_num)
-        self.current_page_num = self.current_page_num + 1
+        # 这里可以优化一下每次发送10个请求，因为scrapy可以支持并发请求大大的提高效率
+        for index in range(1, 16):
+            next_url = "https://dl.lianjia.com/ershoufang/ganjingzi/pg{}/".format(self.current_page_num)
+            self.current_page_num = self.current_page_num + 1
 
-        if (self.current_page_num > (self.total_count / self.page_count)):
-            print("self.current_page_num=", self.current_page_num)
-            self.close_spider()
-            return
-        if next_url:
-            yield Request(url=parse.urljoin(response.url, next_url), dont_filter=True, callback=self.parse)
+            if (self.current_page_num > (self.total_count / self.page_count)):
+                print("self.current_page_num=", self.current_page_num)
+                self.close_spider()
+                return
+            if next_url:
+                print("并发请求next_url", next_url)
+                yield Request(url=parse.urljoin(response.url, next_url), dont_filter=True, callback=self.parse)
 
     def parase_detail(self, response):
         pass
