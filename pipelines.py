@@ -9,7 +9,6 @@ from scrapy.contrib.exporter import CsvItemExporter
 from scrapy import signals
 
 
-
 class NetbeanPipeline(object):
     def process_item(self, item, spider):
         return item
@@ -28,10 +27,16 @@ class CSVPipeline(object):
 
     def spider_opened(self, spider):
         # file = open('%s_items.csv' % spider.name, 'w+b')
-        file = open('lianjia_items.csv', 'w+b')
+        file = open('lianjia_items.csv', 'ab+')
+
+        # with open("output.csv", "w+b", newline='') as file:  # python 3
+        # pass
+        # cr = csv.writer(f)
+
         self.files[spider] = file
         self.exporter = CsvItemExporter(file)
-        self.exporter.fields_to_export = ['house_title', 'house_unit_price']
+        self.exporter.fields_to_export = ['house_title', 'house_unit_price', 'hourse_info', 'house_url', 'total_price',
+                                          'size']
         self.exporter.start_exporting()
 
     def spider_closed(self, spider):

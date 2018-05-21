@@ -54,9 +54,10 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'netbean.middlewares.NetbeanDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   # 'netbean.middlewares.NetbeanDownloaderMiddleware': 543,
+    'netbean.middlewares.RandomUserAgentMiddleware': 400,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -96,3 +97,6 @@ ITEM_PIPELINES = {
 import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print (os.path.join(BASE_DIR, 'netbean'))
+
+#第三方插件配置
+RANDOM_UA_PER_PROXY = True
