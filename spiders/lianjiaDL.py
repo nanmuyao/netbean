@@ -4,7 +4,7 @@ from scrapy.http import Request
 from urllib import parse
 import logging
 import scrapy.settings
-from netbean.items import LianJiaItem, ArticleItemLoader
+from netbean.items import LianJiaItem, HouseItemLoader
 import time
 
 class LianjiadlSpider(scrapy.Spider):
@@ -32,7 +32,7 @@ class LianjiadlSpider(scrapy.Spider):
         post_nodes = response.css(".sellListContent .clear .info")
         for post_node in post_nodes:
             lianjia_item = LianJiaItem()
-            item_loader = ArticleItemLoader(item=LianJiaItem(), response=response)
+            item_loader = HouseItemLoader(item=LianJiaItem(), response=response)
             house_title = post_node.css(".clear .title a::text").extract_first()
             unitPrice = post_node.css(".unitPrice span::text").extract_first()
             total_price = post_node.css(".totalPrice span::text").extract_first()

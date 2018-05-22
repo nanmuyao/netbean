@@ -16,7 +16,7 @@ class NetbeanItem(scrapy.Item):
     pass
 
 
-class ArticleItemLoader(ItemLoader):
+class HouseItemLoader(ItemLoader):
     # 自定义itemloader
     default_output_processor = TakeFirst()
     # default_input_processor = TakeFirst()
