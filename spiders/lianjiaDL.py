@@ -51,7 +51,7 @@ class LianjiadlSpider(scrapy.Spider):
 
         # 提取下一页并交给scrapy进行下载
         # 这里可以优化一下每次发送10个请求，因为scrapy可以支持并发请求大大的提高效率
-        for index in range(1, 5):
+        for index in range(1, 2):
             self.current_page_num = self.current_page_num + 1
             next_url = "https://dl.lianjia.com/ershoufang/ganjingzi/pg{}/".format(self.current_page_num)
             #这里由于链家只让抓取前100页的数据那么如果想抓取全部，只能按照抓取城市的地区来切分区域分别抓取 (self.total_count / self.page_count)
