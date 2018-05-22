@@ -2,6 +2,9 @@
 
 2用scrapy框架抓取链家网二手房数据  
 
+3构建一个自己的简单的ip池
+
+
 效果：
 网易云邓紫棋光年之外评论云图  
 
@@ -10,6 +13,9 @@
 链家数据截图  
 
 ![image](https://github.com/nanmuyao/netbean/blob/master/spiders/lianjia.png)  
+
+ip池截图
+![image](https://github.com/nanmuyao/netbean/blob/master/spiders/ip.png)
 
 总结：目前的不足  
 

@@ -101,3 +101,12 @@ print (os.path.join(BASE_DIR, 'netbean'))
 
 #第三方插件配置
 RANDOM_UA_PER_PROXY = True
+
+#数据库配置
+MYSQL_HOST = "127.0.0.1"
+MYSQL_DBNAME = "article_spider"
+MYSQL_USER = "kbe"
+MYSQL_PASSWORD = "kbe"
+
+SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+SQL_DATE_FORMAT = "%Y-%m-%d"
