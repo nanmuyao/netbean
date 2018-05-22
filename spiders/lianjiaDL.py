@@ -5,22 +5,23 @@ from urllib import parse
 import logging
 import scrapy.settings
 from netbean.items import LianJiaItem, ArticleItemLoader
-
+import time
 
 class LianjiadlSpider(scrapy.Spider):
     custom_settings = {
         'DOWNLOAD_DELAY': '0',
         'LOG_ENABLED': True,
-        'CONCURRENT_REQUESTS': 32,
+        'CONCURRENT_REQUESTS': 16,
         'ITEM_PIPELINES': {'netbean.pipelines.CSVPipeline': 5},
     }
 
+    print("start_time", time.time())
     name = 'lianjiaDL'
     allowed_domains = ['dl.lianjia.com']
     start_urls = ['https://dl.lianjia.com/ershoufang/ganjingzi/']
 
     def __init__(self):
-        self.current_page_num = 2
+        self.current_page_num = 1
         self.page_count = 30
         self.total_count = 0
 
@@ -50,12 +51,13 @@ class LianjiadlSpider(scrapy.Spider):
 
         # 提取下一页并交给scrapy进行下载
         # 这里可以优化一下每次发送10个请求，因为scrapy可以支持并发请求大大的提高效率
-        for index in range(1, 16):
-            next_url = "https://dl.lianjia.com/ershoufang/ganjingzi/pg{}/".format(self.current_page_num)
+        for index in range(1, 5):
             self.current_page_num = self.current_page_num + 1
-
-            if (self.current_page_num > (self.total_count / self.page_count)):
+            next_url = "https://dl.lianjia.com/ershoufang/ganjingzi/pg{}/".format(self.current_page_num)
+            #这里由于链家只让抓取前100页的数据那么如果想抓取全部，只能按照抓取城市的地区来切分区域分别抓取 (self.total_count / self.page_count)
+            if (self.current_page_num > 100):
                 print("self.current_page_num=", self.current_page_num)
+                print("end_time", time.time())
                 self.close_spider()
                 return
             if next_url:

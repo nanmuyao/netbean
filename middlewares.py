@@ -8,6 +8,7 @@
 from scrapy import signals
 from fake_useragent import UserAgent
 import requests
+import time
 
 class NetbeanSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -174,7 +175,22 @@ class GetIP(object):
                 return self.get_random_ip()
 
 
+
+
 # print (crawl_ips())
 # if __name__ == "__main__":
 #     util = TestIP()
 #     util.testIP()
+
+#记录下请求超时的url
+class GetFailedUrl(object):
+    def process_response(self, response, request, spider):
+        if response.status != 200:
+            name = time.strftime('%Y-%m-%d %H:%M', time.localtime())
+            # faild_url = "faild_url"
+            with open(str(name), 'wa+') as file:
+                file.write(response.url)
+                return response
+        else:
+            return response
+

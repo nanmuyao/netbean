@@ -57,6 +57,7 @@ ROBOTSTXT_OBEY = False
 DOWNLOADER_MIDDLEWARES = {
    # 'netbean.middlewares.NetbeanDownloaderMiddleware': 543,
     'netbean.middlewares.RandomUserAgentMiddleware': 400,
+    'netbean.middlewares.GetFailedUrl': 401,
 }
 
 # Enable or disable extensions
