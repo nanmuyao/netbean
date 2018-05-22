@@ -1,9 +1,10 @@
-#抓取网页数据
 1用selenium抓取网易云音乐评论并做成云图  
 
 2用scrapy框架抓取链家网二手房数据  
 
 效果：
+网易云邓紫棋光年之外评论云图  
+
 ![image](https://github.com/nanmuyao/netbean/blob/master/spiders/netBeanMusic.png)
 
 总结：目前的不足  
