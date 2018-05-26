@@ -8,14 +8,14 @@
 效果：
 网易云邓紫棋光年之外评论云图  
 
-![image](https://github.com/nanmuyao/netbean/blob/master/spiders/netBeanMusic.png)
+![image](https://github.com/nanmuyao/netbean/blob/master/spiderData/netBeanMusic.png)
 
 链家数据截图  
 
-![image](https://github.com/nanmuyao/netbean/blob/master/spiders/lianjia.png)  
+![image](https://github.com/nanmuyao/netbean/blob/master/spiderData/lianjia.png)
 
 ip池截图
-![image](https://github.com/nanmuyao/netbean/blob/master/spiders/ip.png)
+![image](https://github.com/nanmuyao/netbean/blob/master/spiderData/ip.png)
 
 总结：目前的不足  
 

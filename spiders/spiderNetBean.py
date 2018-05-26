@@ -8,7 +8,7 @@
 # # 设置chromedriver不加载图片
 # chrome_options = webdriver.ChromeOptions()
 # #设置游览器不加载图片，节省网络流量提高速度
-# prefs = {"profile.managed_default_content_settings.images": 2}
+# prefs = {"profile.managed_default_content_settings.spiderData": 2}
 # chrome_options.add_experimental_option("prefs", prefs)
 # #新版本chrome支持无界面游览了
 # chrome_options.add_argument("--headless")
