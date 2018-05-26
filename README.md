@@ -22,3 +22,6 @@ ip池截图
 1网易云的评论数据最好可以研究出网易云的加密接口直接拉去json数据  
   
 2链家的数据可以用scrapy-redis框架进行抓取提高抓取效率  
+
+
+![image](https://github.com/nanmuyao/netbean/tree/master/spiderData/mysql.png)
